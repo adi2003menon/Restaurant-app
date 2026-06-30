@@ -120,10 +120,25 @@ const logoutUser = async (req, res) => {
   }
 };
 
+const getProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "User not found", success: false });
+    }
+    res.json(user);
+  } catch (error) {
+    return res.json({ message: "Internal server error", success: false });
+  }
+};
+
 
 module.exports = {
     registerUser,
     loginUser,
     adminLogin,
-    logoutUser
+    logoutUser,
+    getProfile
 };

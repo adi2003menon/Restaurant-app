@@ -5,12 +5,16 @@ const cookieParser= require('cookie-parser')
 const dotenv= require('dotenv')
 const connectDB = require('./config/db')
 const authRoutes=require('./routes/authRoutes')
+const categoryRoutes=require('./routes/categoryRoutes')
+const menuRoutes=require('./routes/menuRoutes')
+const connectCloudinary = require('./config/cloudinary')
 
 dotenv.config();
 
 const app = express();
 
 connectDB();
+connectCloudinary()
 
 //middlewares
 app.use(express.json());
@@ -26,6 +30,9 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth",authRoutes)
+app.use("/api/category",categoryRoutes)
+app.use("/api/menu",menuRoutes)
+
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
