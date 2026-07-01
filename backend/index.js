@@ -7,6 +7,9 @@ const connectDB = require('./config/db')
 const authRoutes=require('./routes/authRoutes')
 const categoryRoutes=require('./routes/categoryRoutes')
 const menuRoutes=require('./routes/menuRoutes')
+const cartRoutes=require('./routes/cartRoutes')
+const orderRoutes=require('./routes/orderRoutes')
+const bookingRoutes=require('./routes/bookingRoutes')
 const connectCloudinary = require('./config/cloudinary')
 
 dotenv.config();
@@ -32,10 +35,12 @@ app.get("/", (req, res) => {
 app.use("/api/auth",authRoutes)
 app.use("/api/category",categoryRoutes)
 app.use("/api/menu",menuRoutes)
+app.use("/api/cart",cartRoutes)
+app.use("/api/order",orderRoutes)
+app.use("/api/booking",bookingRoutes)
 
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
 });
 
- 
