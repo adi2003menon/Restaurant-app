@@ -6,18 +6,18 @@ import { AppContext } from "../context/AppContext";
 const Login = () => {
   const { navigate, loading, setLoading, axios, setUser } =
     useContext(AppContext);
-  // state for input value
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  // handle change input value
+  
   const onChangeHandler = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // handle submit form
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
