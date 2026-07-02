@@ -19,7 +19,7 @@ const app = express();
 connectDB();
 connectCloudinary()
 
-//middlewares
+
 app.use(express.json());
 
 app.use(cors({

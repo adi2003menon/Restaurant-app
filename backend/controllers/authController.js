@@ -4,12 +4,13 @@ const bcrypt =require('bcryptjs')
 
 const generateToken = (res, payload) => {
 const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1d" });
+
 res.cookie("token", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "none",
-    maxAge: 24 * 60 * 60 * 1000,
-  });
+  httpOnly: true,
+  secure: false,      // true only in production with HTTPS
+  sameSite: "lax",    // use "lax" for localhost
+  maxAge: 24 * 60 * 60 * 1000,
+});
   return token;
 }
 
@@ -90,12 +91,13 @@ const adminLogin = async (req, res) => {
       expiresIn: "1d",
     });
 
+
     res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
-      maxAge: 24 * 60 * 60 * 1000,
-    });
+  httpOnly: true,
+  secure: false,      
+  sameSite: "lax",    
+  maxAge: 24 * 60 * 60 * 1000,
+});
 
     return res.json({
       success: true,

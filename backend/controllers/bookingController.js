@@ -9,7 +9,7 @@ const createBooking = async (req, res) => {
         .status(400)
         .json({ message: "All fields are required", success: false });
     }
-    // Check for overlapping bookings
+    
     const existingBooking = await Booking.findOne({
       date,
       time,

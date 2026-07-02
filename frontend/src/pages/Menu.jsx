@@ -27,7 +27,7 @@ const Menu = () => {
 
         <div>
           <h1>
-            . Our <span className="text-yellow-500">Menu</span>
+             Our <span className="text-yellow-500">Menu</span>
           </h1>{" "}
           <p className="text-gray-600 max-w-2xl mx-auto mb-8">
             Explore our delicious selection of handcrafted dishes made with the

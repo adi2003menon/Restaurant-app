@@ -12,13 +12,13 @@ export default function Testimonial() {
             <h1 className="text-lg font-medium text-gray-800">
               Donald Jackman
             </h1>
-            <p className="text-gray-800/80">Content Creator</p>
+            <p className="text-gray-800/80">Food Blogger</p>
           </div>
         </div>
         <p className="text-gray-500 px-6 text-center">
-          I've been using imagify for nearly two years, primarily for Instagram,
-          and it has been incredibly user-friendly, making my work much easier.
-        </p>
+  The food was fresh, delicious, and delivered right on time. Ordering was
+  simple, and the customer service was excellent. I'll definitely order again!
+</p>
         <div className="flex justify-center pt-4">
           <div className="flex gap-0.5">
             <svg
@@ -100,9 +100,9 @@ export default function Testimonial() {
           </div>
         </div>
         <p className="text-gray-500 px-6 text-center">
-          I've been using imagify for nearly two years, primarily for Instagram,
-          and it has been incredibly user-friendly, making my work much easier.
-        </p>
+  Amazing taste and generous portions! The online ordering process was smooth,
+  and my meal arrived hot and perfectly packed.
+</p>
         <div className="flex justify-center pt-4">
           <div className="flex gap-0.5">
             <svg
@@ -178,15 +178,16 @@ export default function Testimonial() {
           />
           <div className="pt-8 text-center">
             <h1 className="text-lg font-medium text-gray-800">
-              James Washington
+              Priya Xavier
             </h1>
-            <p className="text-gray-800/80">Marketing Manager</p>
+            <p className="text-gray-800/80">Restaurant Enthusiast</p>
           </div>
         </div>
         <p className="text-gray-500 px-6 text-center">
-          I've been using imagify for nearly two years, primarily for Instagram,
-          and it has been incredibly user-friendly, making my work much easier.
-        </p>
+  One of the best food ordering experiences I've had. Great variety, affordable
+  prices, and quick delivery. Highly recommended for anyone craving quality
+  food.
+</p>
         <div className="flex justify-center pt-4">
           <div className="flex gap-0.5">
             <svg

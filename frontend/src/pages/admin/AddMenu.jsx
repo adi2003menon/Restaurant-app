@@ -29,25 +29,58 @@ const AddMenu = () => {
       setPreview(URL.createObjectURL(selectedFile));
     }
   };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     setLoading(true);
+  //     const { data } = await axios.post("/api/menu/add", formData, {
+  //       headers: { "Content-Type": "multipart/form-data" },
+  //     });
+  //     if (data.success) {
+  //       toast.success(data.message);
+  //       navigate("/admin/menus");
+  //     } else {
+  //       toast.error(data.message);
+  //     }
+  //   } catch (error) {
+  //     toast.error(error.response.data.message || "Something went wrong");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      setLoading(true);
-      const { data } = await axios.post("/api/menu/add", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      if (data.success) {
-        toast.success(data.message);
-        navigate("/admin/menus");
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      toast.error(error.response.data.message || "Something went wrong");
-    } finally {
-      setLoading(false);
+  e.preventDefault();
+
+  try {
+    setLoading(true);
+
+    const data = new FormData();
+
+    data.append("name", formData.name);
+    data.append("price", formData.price);
+    data.append("description", formData.description);
+    data.append("category", formData.category);
+    data.append("image", file);
+
+    const response = await axios.post("/api/menu/add", data);
+
+    if (response.data.success) {
+      toast.success(response.data.message);
+      navigate("/admin/menus");
+    } else {
+      toast.error(response.data.message);
     }
-  };
+  } catch (error) {
+    console.log(error);
+    toast.error(
+      error.response?.data?.message || "Something went wrong"
+    );
+  } finally {
+    setLoading(false);
+  }
+};
+
   return (
     <div className="py-12">
       <form
