@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { AppContext } from "../context/AppContext";
 import { Link } from "react-router-dom";
 import {
@@ -18,6 +18,19 @@ const Navbar = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const profileRef = useRef(null);
+
+  // Close dropdown when clicking anywhere outside of it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const logout = async () => {
     try {
@@ -82,6 +95,7 @@ const Navbar = () => {
             <button
               onClick={() => navigate("/cart")}
               className="relative p-2 hover:bg-gray-100 rounded-lg"
+              aria-label="Cart"
             >
               <ShoppingCart size={22} />
 
@@ -93,19 +107,20 @@ const Navbar = () => {
             {/* Desktop Login/Profile */}
             <div className="hidden md:block">
               {user ? (
-                <div
-                  className="relative"
-                  onMouseEnter={() => setIsProfileOpen(true)}
-                  onMouseLeave={() => setIsProfileOpen(false)}
-                >
-                  <button className="p-2 hover:bg-gray-100 rounded-lg">
+                <div className="relative" ref={profileRef}>
+                  <button
+                    onClick={() => setIsProfileOpen((prev) => !prev)}
+                    className="p-2 hover:bg-gray-100 rounded-lg"
+                    aria-label="Profile menu"
+                  >
                     <UserCircle size={30} />
                   </button>
 
                   {isProfileOpen && (
-                    <div className="absolute right-0 mt-2 w-52 bg-white rounded-lg shadow-lg border">
+                    <div className="absolute right-0 pt-1 w-52 bg-white rounded-lg shadow-lg border">
                       <Link
                         to="/my-bookings"
+                        onClick={() => setIsProfileOpen(false)}
                         className="flex items-center px-4 py-3 hover:bg-gray-100"
                       >
                         <Calendar size={18} className="mr-2" />
@@ -114,6 +129,7 @@ const Navbar = () => {
 
                       <Link
                         to="/my-orders"
+                        onClick={() => setIsProfileOpen(false)}
                         className="flex items-center px-4 py-3 hover:bg-gray-100"
                       >
                         <Package size={18} className="mr-2" />
@@ -121,7 +137,10 @@ const Navbar = () => {
                       </Link>
 
                       <button
-                        onClick={logout}
+                        onClick={() => {
+                          setIsProfileOpen(false);
+                          logout();
+                        }}
                         className="flex items-center w-full px-4 py-3 text-red-600 hover:bg-red-50"
                       >
                         <LogOut size={18} className="mr-2" />
@@ -144,6 +163,7 @@ const Navbar = () => {
             <button
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
             >
               {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
             </button>
